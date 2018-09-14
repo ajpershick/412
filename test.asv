@@ -27,15 +27,20 @@ reflect(image);
 
 function reflect(image)
    % return an image that is reflected about the vertical axis
+    image=imread('hccca.jpg');
+    image=image(:,:,1);
+    figure;
+    imshow(image);
     image=image(:,(end:-1:1),:);
-    figure; imshow(image);
+    figure(2);imshow(image([end:-1:1],:,:)');
     end
 
 function dim(image,fraction)
    % return an image that is scaled to be darker by ‘fraction’
    imshow(image);
    dimmed = image/fraction;
-   figure; imshow(dimmed);
+   figure;
+   imshow(dimmed);
 end
 
 function contrast_compress(image)
@@ -44,7 +49,8 @@ function contrast_compress(image)
    % This is just an arbitrary modification--- the resulting image
    % won’t look good.
     contrasted = sqrt(double(image(:,:,1)));
-    figure; imshow(contrasted);
+    figure;
+    imshow(contrasted);
 end
 
 
