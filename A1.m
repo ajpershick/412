@@ -1,11 +1,12 @@
 image = imread('coolcat.jpg'); 
 figure; imshow(image);
-%shrink(image);
-%zoom(image);
-%subsample(image, 4);
+% shrink(image);
+% zoom(image);
+% subsample(image, 4);
 % dim(image, 2);
 % contrast_compress(image);
-reflect(image);
+% reflect(image);
+% myrotate(image);
 
 % function subsample(image, factor)
 %     %Reduces the size of an image by taking only pixels every ‘factor’ pixels apart
@@ -43,8 +44,13 @@ function contrast_compress(image)
    % rescale so that the image uses the full [0,1] intensity range.
    % This is just an arbitrary modification--- the resulting image
    % won’t look good.
-    contrasted = sqrt(double(image(:,:,1)));
-    figure; imshow(contrasted);
+    firstChannel = sqrt(double(image(:,:,1)));
+    secondChannel = sqrt(double(image(:,:,2)));
+    thirdChannel = sqrt(double(image(:,:,3)));
+    combinedChannels = firstChannel + secondChannel + thirdChannel;
+    rescaledByMax = combinedChannels / max(combinedChannels(:));
+    rescaledImage = rescaledByMax - min(rescaledByMax(:));
+   figure; imshow(rescaledImage);
 end
 
 
