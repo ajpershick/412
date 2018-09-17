@@ -43,12 +43,10 @@ function contrast_compress(image)
    % take the square root of each colour channel and then
    % rescale so that the image uses the full [0,1] intensity range.
    % This is just an arbitrary modification--- the resulting image
-<<<<<<< HEAD:test.m
    % wonï¿½t look good.
     contrasted = sqrt(double(image(:,:,1)));
     figure; imshow(contrasted);
-=======
-   % won’t look good.
+   % wonï¿½t look good.
     firstChannel = sqrt(double(image(:,:,1)));
     secondChannel = sqrt(double(image(:,:,2)));
     thirdChannel = sqrt(double(image(:,:,3)));
@@ -56,7 +54,6 @@ function contrast_compress(image)
     rescaledByMax = combinedChannels / max(combinedChannels(:));
     rescaledImage = rescaledByMax - min(rescaledByMax(:));
    figure; imshow(rescaledImage);
->>>>>>> c9929a9563f6768c41d870d0d4397dbded0cd5a1:A1.m
 end
 
 
