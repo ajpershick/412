@@ -8,7 +8,7 @@ figure; imshow(image);
 reflect(image);
 
 % function subsample(image, factor)
-%     %Reduces the size of an image by taking only pixels every ‘factor’ pixels apart
+%     %Reduces the size of an image by taking only pixels every ï¿½factorï¿½ pixels apart
 % end
 
 % function shrink(image)
@@ -32,7 +32,7 @@ function reflect(image)
     end
 
 function dim(image,fraction)
-   % return an image that is scaled to be darker by ‘fraction’
+   % return an image that is scaled to be darker by ï¿½fractionï¿½
    imshow(image);
    dimmed = image/fraction;
    figure; imshow(dimmed);
@@ -42,7 +42,7 @@ function contrast_compress(image)
    % take the square root of each colour channel and then
    % rescale so that the image uses the full [0,1] intensity range.
    % This is just an arbitrary modification--- the resulting image
-   % won’t look good.
+   % wonï¿½t look good.
     contrasted = sqrt(double(image(:,:,1)));
     figure; imshow(contrasted);
 end
