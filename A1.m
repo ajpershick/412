@@ -2,7 +2,7 @@ image = imread('coolcat.jpg');
 figure() 
 subplot(1,2,1);
 imshow(image);
-% shrink(image);
+shrink(image);
 % zoom(image);
 % subsample(image, 4);
 % dim(image, 2);
@@ -15,6 +15,7 @@ function subsample(image, factor)
     image = image(1:factor:end,1:factor:end,:);
     subplot(1,2,2);
     imshow(image);
+    size(image)
 end
 
 function shrink(image)
@@ -23,14 +24,19 @@ function shrink(image)
     
 end
 
-% function zoom(image)
+function zoom(image)
 %    % Makes the image twice as large in both height and width. Each pixel in the input
 %     %image is replicated to become 4 pixels in the output image.
-% end
 
-% function myrotate(image)
-%    % return an image rotated by 90 degrees clockwise
-% end
+end
+
+function myrotate(image)
+   % return an image rotated by 90 degrees clockwise
+    permuted = permute(image, [2 1 3]);
+    reflected_permuted = permuted(:,(end:-1:1),:);
+    subplot(1,2,2);
+    imshow(reflected_permuted);
+end
 
 function reflect(image)
    % return an image that is reflected about the vertical axis

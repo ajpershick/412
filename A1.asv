@@ -1,40 +1,43 @@
 image = imread('coolcat.jpg'); 
 figure() 
-subplot(2,4,2);
+subplot(1,2,1);
 imshow(image);
 % shrink(image);
 % zoom(image);
-subsample(image, 4);
+% subsample(image, 4);
 % dim(image, 2);
 % contrast_compress(image);
 % reflect(image);
-% myrotate(image);
+myrotate(image);
 
 function subsample(image, factor)
 %     %Reduces the size of an image by taking only pixels every "factor" pixels apart
-    image = image(:,factor,:);
+    image = image(1:factor:end,1:factor:end,:);
     subplot(1,2,2);
     imshow(image);
+    size(image)
 end
 
-% function shrink(image)
+function shrink(image)
 %    % Makes the image half as large in both height and width. Each pixel should be the
 %    % average of 4 pixels. Assume input image has even number of rows/columns.
-% end
+    
+end
 
 % function zoom(image)
 %    % Makes the image twice as large in both height and width. Each pixel in the input
 %     %image is replicated to become 4 pixels in the output image.
 % end
 
-% function myrotate(image)
-%    % return an image rotated by 90 degrees clockwise
-% end
+function myrotate(image)
+   % return an image rotated by 90 degrees clockwise
+    
+end
 
 function reflect(image)
    % return an image that is reflected about the vertical axis
     image=image(:,(end:-1:1),:);
-    figure()
+    subplot(1,2,2);
     imshow(image);
     end
 
@@ -42,7 +45,7 @@ function dim(image,fraction)
    % return an image that is scaled to be darker by �fraction�
    imshow(image);
    dimmed = image/fraction;
-   figure() 
+   subplot(1,2,2);
    imshow(dimmed);
 end
 
@@ -56,7 +59,7 @@ function contrast_compress(image)
     combinedChannels = firstChannel + secondChannel + thirdChannel;
     rescaledByMax = combinedChannels / max(combinedChannels(:));
     rescaledImage = rescaledByMax - min(rescaledByMax(:));
-    figure() 
+    subplot(1,2,2);
     imshow(rescaledImage);
 end
 
