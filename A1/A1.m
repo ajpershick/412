@@ -88,6 +88,3 @@ function zoom(image)
     size(newImage)
     newImage
 end
-
-
-
