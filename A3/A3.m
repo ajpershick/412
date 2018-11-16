@@ -32,9 +32,6 @@ title('Gradient Magnitude, Gmag (left), and Gradient Direction, Gdir (right)')
 [Gx2, Gy2] = imgradientxy(image2);
 [Gx3, Gy3] = imgradientxy(image3);
 
-% Initialize PQ Matrix vector
-PandQMatrix = zeros(imgHeight, imgWidth);
-
 % Initialize intensity E vectors
 E1 = zeros(imgHeight, imgWidth);
 E2 = zeros(imgHeight, imgWidth);

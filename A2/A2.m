@@ -4,7 +4,14 @@
 % 301190478
 
 close all; % Clears previous figures each run
-image=imread('images/OneBallLetteringVerticalLarge.jpg');
+ image=imread('images/OneBallVerticalLarge.jpg');
+%image=imread('images/OneBallLetteringVerticalLarge.jpg');
+% image=imread('images/TwoBallsVerticalLarge.jpg');
+% image=imread('images/OneBallLetteringLarge.jpg');
+%image=imread('images/TwoBallsTouchingVerticalLarge.jpg');
+
+
+
 
 % Converting the image to black and white in order to more easily detect edges
 bw=(double(image(:,:,1))+double(image(:,:,2))+double(image(:,:,3)))/(3*255);
