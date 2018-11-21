@@ -1,9 +1,14 @@
 digitDatasetPath = fullfile('/home/alec/Documents/412/A4', 'orl_faces');
 imds = imageDatastore(digitDatasetPath, ...
-    'IncludeSubfolders',true,'LabelSource','foldernames','ReadFcn', @contrastImage);
+    'IncludeSubfolders',true,'LabelSource','foldernames');
 
 % imds.ReadFcn = @smoothImage;
-% imds.ReadFcn = @contrastImage;
+imds.ReadFcn = @contrastImage;
+% imds.ReadFcn = @normalizeImage;
+% imds.ReadFcn = @SmoothAndContrastImage;
+
+
+
 
 close all;
 
@@ -37,18 +42,32 @@ layers = [
     
     convolution2dLayer(2,32,'Padding',1)
     reluLayer
+
+    maxPooling2dLayer(2,'Stride',2)
     
     fullyConnectedLayer(40)
     softmaxLayer
     classificationLayer];
 
-options = trainingOptions('sgdm', ...
-    'MaxEpochs',50, ...
+% options = trainingOptions('sgdm', ...
+%     'MaxEpochs',100, ...
+%     'InitialLearnRate',0.0001, ...
+%     'ValidationData',imdsValidation, ...
+%     'ValidationFrequency',40, ...
+%     'Verbose',false, ...
+%     'InitialLearnRate',0.01, ...
+%     'Plots','training-progress');
+
+    options = trainingOptions('sgdm', ...
+    'LearnRateSchedule','piecewise', ...
+    'InitialLearnRate',0.01, ...
+    'LearnRateDropFactor',0.5, ...
+    'LearnRateDropPeriod',5, ...
+    'MaxEpochs',30, ...
+    'MiniBatchSize',60, ...
     'ValidationData',imdsValidation, ...
     'ValidationFrequency',15, ...
-    'Verbose',false, ...
-    'InitialLearnRate',0.01, ...
-    'Plots','training-progress');
+    'Plots','training-progress')
     
 
 net = trainNetwork(imdsTrain,layers,options);
@@ -64,7 +83,8 @@ function image = smoothImage(filename)
 end
 
 function image = normalizeImage(filename)
-    img = mat2gray(filename);
+    img = imread(filename);
+    img = mat2gray(img);
     image = im2double(img);
 end
 
@@ -72,3 +92,10 @@ function image = contrastImage(filename)
     img = imread(filename);
     image = imadjust(img);
 end
+
+function image = SmoothAndContrastImage(filename)
+    img = imread(filename);
+    img = imgaussfilt(img, 4);
+    image = imadjust(img);
+end
+
